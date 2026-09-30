@@ -25,3 +25,9 @@ export const clashDisplay = localFont({
 });
 
 export const fontVariables = [poppins.variable, satoshi.variable, clashDisplay.variable].join(" ");
+
+export const fontRootCss = [
+  `--font-poppins: ${poppins.style.fontFamily};`,
+  `--font-satoshi: ${satoshi.style.fontFamily};`,
+  `--font-clash-display: ${clashDisplay.style.fontFamily};`,
+].join("\n");

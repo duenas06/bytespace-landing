@@ -1,3 +1,4 @@
+import { Seo } from "@/components/seo";
 import { SiteFooter } from "@/components/layout";
 import {
   CreatorCtaSection,
@@ -12,6 +13,7 @@ import {
 export default function HomePage() {
   return (
     <>
+      <Seo />
       <main>
         <HeroSection />
         <TrustedBySection />

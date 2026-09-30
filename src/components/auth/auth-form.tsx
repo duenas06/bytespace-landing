@@ -1,5 +1,3 @@
-"use client";
-
 import { Field, chakra } from "@chakra-ui/react";
 import { useState, type FormEvent } from "react";
 

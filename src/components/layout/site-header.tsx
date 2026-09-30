@@ -1,9 +1,7 @@
-"use client";
-
 import { Box, HStack, IconButton, Link, Stack } from "@chakra-ui/react";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import NextLink from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { Logo } from "@/components/common";
@@ -11,7 +9,7 @@ import { Container } from "@/components/ui";
 import { accountNav, primaryNav } from "@/data/navigation";
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  const { pathname } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   return (

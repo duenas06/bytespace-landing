@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Icon, chakra, type HTMLChakraProps } from "@chakra-ui/react";
 import { Search } from "lucide-react";
 import { useState, type FormEvent } from "react";

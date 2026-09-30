@@ -11,18 +11,20 @@ common     domain-agnostic building blocks                     (CourseCard, Avat
    |
 sections   one component per band of a page                    (HeroSection, TestimonialsSection)
    |
-app        routes that compose sections                        (/, /login, /register, not-found)
+pages      routes that compose sections                        (/, /login, /register, /404)
 ```
 
 ## Directory map
 
 ```
 src/
-  app/                     App Router entries
-    layout.tsx             fonts + Chakra provider
-    page.tsx               landing page
-    not-found.tsx          404 screen
-    (auth)/login|register  auth routes (route group, no shared URL segment)
+  pages/                   Pages Router entries
+    _app.tsx               Emotion cache, font CSS variables, Chakra provider
+    _document.tsx          html shell + Emotion critical-CSS extraction
+    index.tsx              landing page
+    login.tsx              sign in
+    register.tsx           create an account
+    404.tsx                not-found screen
   assets/fonts/            self-hosted woff2 consumed by next/font/local
   components/
     ui/                    primitives driven by theme recipes
@@ -30,8 +32,11 @@ src/
     layout/                SiteHeader, SiteFooter
     sections/home/         landing-page bands
     auth/                  auth layout, card, form, showcase
+    seo.tsx                per-page <Head> metadata
   data/                    typed content (home.ts, auth.ts, navigation.ts)
-  lib/fonts.ts             next/font wiring, exports `fontVariables`
+  lib/
+    fonts.ts               next/font wiring, exports `fontRootCss`
+    emotion-cache.ts       shared cache factory for client and server
   theme/                   the design system
   types/content.ts         shared content contracts
 ```
@@ -52,23 +57,25 @@ src/
 
 **Recipes are not registered on the Chakra system.** They are consumed through the `chakra()` factory in `src/components/ui`, e.g. `chakra("button", buttonRecipe)`. This avoids merging with (and fighting) Chakra's built-in `button`/`input` recipes, and keeps our variant names (`visual`, `scale`, `tone`, `shape`) unambiguous.
 
-Consequence: the three files in `src/components/ui` that call `chakra()` are Client Components, because the factory is client-only. Everything else in the tree stays a Server Component.
+The theme never imports from Next or from `next/font` — it refers to fonts only as the CSS variables `--font-poppins`, `--font-satoshi` and `--font-clash-display`. Those variables are supplied by the app shell (below), so the design system stays framework-agnostic.
 
-## Server/Client boundaries
+## App shell
 
-Server Components by default. Only these are `"use client"`:
+Two files carry everything that is Pages-Router specific:
 
-- `components/ui/{button,pill,text-input}.tsx` — `chakra()` factory requirement
-- `components/ui/provider.tsx` — `ChakraProvider`
-- `components/layout/site-header.tsx` — mobile menu state, `usePathname`
-- `components/common/inline-form.tsx` — controlled search/newsletter input
-- `components/sections/home/topic-filter.tsx` — active topic + "+ More"
-- `components/auth/auth-form.tsx` — controlled fields and validation
+**`_app.tsx`**
 
-Two rules follow from Next.js' server/client boundary and are worth knowing before adding code:
+1. Creates one Emotion cache for the browser and accepts a server-supplied cache as a prop, wrapping the tree in `CacheProvider`.
+2. Emits the three font CSS variables onto `:root` via a `styled-jsx` global block. `next/font` only emits its `@font-face` CSS for modules reachable from a page or `_app`, and `_document` is explicitly excluded from the font loader, so this is where the variables have to be declared.
+3. Mounts `ChakraProvider` through `components/ui/provider.tsx`.
 
-1. **Never pass a component as a prop from a Server Component to a Chakra component.** `<Icon as={Star} />` fails at build time. Use `<Icon asChild><Star /></Icon>` instead — that passes an element, which serialises.
-2. **`chakra.svg` (and any other `chakra.*` access) is client-only.** For inline SVG inside a Server Component, use `<Box asChild>` around a plain `<svg>`.
+**`_document.tsx`**
+
+Runs `extractCriticalToChunks` from `@emotion/server` over the rendered HTML and inlines the resulting `<style data-emotion>` tags. Without this the server HTML would ship unstyled and flash on hydration. `enhanceApp` hands the per-request cache to `_app`, so server and client agree on class names.
+
+## Metadata
+
+`components/seo.tsx` wraps `next/head` and renders the title, description and Open Graph tags. Every page renders one `<Seo />`; the home page uses the defaults, the rest pass a title.
 
 ## Layout system
 
@@ -87,3 +94,10 @@ The hero photography PNGs are alpha-trimmed at build-prep time, so a layout box 
 ## Content
 
 Copy and records live in `src/data` and are typed by `src/types/content.ts`. Sections import data rather than embedding strings, so swapping in a CMS later means replacing the module, not the components.
+
+## Conventions worth knowing
+
+- No raw hex colors, font stacks or px font sizes outside `src/theme`. Use a token, a `textStyle` or a `layerStyle`.
+- Icons render as `<Icon asChild><SomeIcon /></Icon>` rather than `as={SomeIcon}`.
+- Inline SVG uses `<Box asChild>` around a plain `<svg>` so Chakra style props still apply.
+- `tsconfig.json` includes `.next/types` only. Including `.next/dev/types` as well makes `tsc` report a duplicate `PagesPageConfig` whenever a dev server and a production build have both written their generated types.

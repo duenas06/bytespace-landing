@@ -13,9 +13,10 @@ Implemented screens:
 
 ## Stack
 
-- **Next.js 16** (App Router, React Server Components, Turbopack)
+- **Next.js 16** (Pages Router, Turbopack)
 - **React 19** + **TypeScript** (strict)
 - **Chakra UI v3** — the whole design system is expressed as Chakra tokens, text styles, layer styles and recipes
+- **Emotion** with SSR critical-CSS extraction in `_document`, so the first paint is already styled
 - **lucide-react** for icons
 - **next/font** — Poppins (Google), Satoshi + Clash Display (self-hosted `woff2`)
 
@@ -54,7 +55,7 @@ Everything under `src/theme/` is transcribed from the Figma style guide that shi
 1. Put the copy and records in `src/data/` with a type from `src/types/content.ts`.
 2. Compose existing primitives from `src/components/ui` and `src/components/common`.
 3. Add the section component under `src/components/sections/<page>/` and export it from that folder's barrel.
-4. Render it from the route in `src/app/`.
+4. Render it from the route in `src/pages/`.
 
 Nothing in a section file should contain a raw hex color, font stack or px font size — reach for a token, `textStyle` or `layerStyle` instead. See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full picture.
 

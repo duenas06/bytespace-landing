@@ -1,5 +1,3 @@
-"use client";
-
 import { Wrap } from "@chakra-ui/react";
 import { useState } from "react";
 
