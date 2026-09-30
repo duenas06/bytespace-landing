@@ -2,12 +2,13 @@ import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import { SiteFooter } from "@/components/layout";
-import { CourseCollection, PageIntro } from "@/components/sections/catalog";
+import { CourseCollection, SearchHero } from "@/components/sections/catalog";
 import { Seo } from "@/components/seo";
-import { featuredCourses, learningPathCategories } from "@/data/home";
+import { catalogTopics, searchResults } from "@/data/catalog";
+import { learningPathCategories } from "@/data/home";
 
 const description =
-  "Explore a variety of courses across different fields, from technology to the arts, and make a difference in your career and life.";
+  "Search hundreds of ByteSpace courses across design, development, business and more.";
 
 export default function CoursesPage() {
   const { query } = useRouter();
@@ -16,11 +17,17 @@ export default function CoursesPage() {
 
   return (
     <>
-      <Seo title="Courses" description={description} />
+      <Seo title="Find Your Next Course" description={description} />
 
       <Box as="main">
-        <PageIntro title="Courses" description={description} />
-        <CourseCollection courses={featuredCourses} activeCategory={category?.label} />
+        <SearchHero title="Find Your Next Course" scopeLabel="Courses" />
+        <CourseCollection
+          courses={searchResults}
+          activeCategory={category?.label}
+          topics={catalogTopics}
+          perPage={18}
+          pageCount={5}
+        />
       </Box>
 
       <SiteFooter />

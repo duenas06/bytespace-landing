@@ -16,8 +16,10 @@ export {
   RevenueCard,
   StudentsCard,
 } from "./metric-cards";
+export { Pagination } from "./pagination";
 export { Rating } from "./rating";
 export { ReviewCard } from "./review-card";
 export { StarRating } from "./star-rating";
 export { StatBlock } from "./stat-block";
 export { TestimonialCard } from "./testimonial-card";
+export { TopicFilter } from "./topic-filter";

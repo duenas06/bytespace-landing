@@ -1,7 +1,8 @@
 import { HStack, Icon, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { BarChart3, ListFilter, Shapes, SlidersHorizontal } from "lucide-react";
+import { useState } from "react";
 
-import { CourseCard } from "@/components/common";
+import { CourseCard, Pagination, TopicFilter } from "@/components/common";
 import { Pill, Section } from "@/components/ui";
 import type { Course } from "@/types/content";
 
@@ -14,9 +15,21 @@ const filters = [
 type CourseCollectionProps = {
   courses: Course[];
   activeCategory?: string;
+  topics?: string[];
+  perPage?: number;
+  pageCount?: number;
 };
 
-export function CourseCollection({ courses, activeCategory }: CourseCollectionProps) {
+export function CourseCollection({
+  courses,
+  activeCategory,
+  topics,
+  perPage,
+  pageCount,
+}: CourseCollectionProps) {
+  const [page, setPage] = useState(1);
+  const visibleCourses = perPage ? courses.slice(0, perPage) : courses;
+
   return (
     <Section pt={{ base: "40px", xl: "64px" }}>
       <Stack gap={{ base: "32px", xl: "44px" }}>
@@ -45,17 +58,35 @@ export function CourseCollection({ courses, activeCategory }: CourseCollectionPr
           </Pill>
         </HStack>
 
-        {courses.length === 0 ? (
+        {topics ? (
+          <TopicFilter
+            topics={topics}
+            tone="subtle"
+            justify="flex-start"
+            pillProps={{ px: "16px" }}
+          />
+        ) : null}
+
+        {visibleCourses.length === 0 ? (
           <Text textStyle="body.l" color="fg.muted">
             No courses in this category yet.
           </Text>
         ) : (
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap="gutter">
-            {courses.map((course, index) => (
-              <CourseCard key={course.id} course={course} priority={index < 3} />
+            {visibleCourses.map((course, index) => (
+              <CourseCard key={`${course.id}-${index}`} course={course} priority={index < 3} />
             ))}
           </SimpleGrid>
         )}
+
+        {pageCount && pageCount > 1 ? (
+          <Pagination
+            page={page}
+            pageCount={pageCount}
+            onChange={setPage}
+            pt={{ base: "16px", xl: "24px" }}
+          />
+        ) : null}
       </Stack>
     </Section>
   );

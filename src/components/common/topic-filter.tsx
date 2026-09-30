@@ -1,30 +1,43 @@
-import { Wrap } from "@chakra-ui/react";
+import { Wrap, type WrapProps } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { Button, Pill } from "@/components/ui";
+import { Button, Pill, type PillProps } from "@/components/ui";
 
-type TopicFilterProps = {
+type TopicFilterProps = Omit<WrapProps, "children"> & {
   topics: string[];
   visibleCount?: number;
+  initialTopic?: string;
+  tone?: "neutral" | "subtle";
+  pillProps?: PillProps;
 };
 
-export function TopicFilter({ topics, visibleCount = 18 }: TopicFilterProps) {
-  const [activeTopic, setActiveTopic] = useState(topics[0]);
+export function TopicFilter({
+  topics,
+  visibleCount = topics.length,
+  initialTopic,
+  tone = "neutral",
+  pillProps,
+  ...rest
+}: TopicFilterProps) {
+  const [activeTopic, setActiveTopic] = useState(initialTopic ?? topics[0]);
   const [showAll, setShowAll] = useState(false);
 
   const visibleTopics = showAll ? topics : topics.slice(0, visibleCount);
   const hasMore = topics.length > visibleCount;
+  const hoverBg = tone === "neutral" ? "ink.200" : "ink.100";
 
   return (
-    <Wrap justify="center" gapX="16px" gapY="16px" maxW="1160px" mx="auto">
+    <Wrap columnGap="16px" rowGap="16px" {...rest}>
       {visibleTopics.map((topic) => (
         <Pill
           key={topic}
           asChild
           scale="md"
           interactive
-          tone={topic === activeTopic ? "accent" : "neutral"}
-          _hover={topic === activeTopic ? undefined : { bg: "ink.200" }}
+          tone={topic === activeTopic ? "accent" : tone}
+          color="fg"
+          _hover={topic === activeTopic ? undefined : { bg: hoverBg }}
+          {...pillProps}
         >
           <button
             type="button"

@@ -9,7 +9,7 @@ Implemented screens:
 | `/`                | `src/pages/index.tsx`           | Home / landing page                | Required deliverable |
 | `/login`           | `src/pages/login.tsx`           | Sign in                            | Bonus                |
 | `/register`        | `src/pages/register.tsx`        | Create an account                  | Bonus                |
-| `/courses`         | `src/pages/courses/index.tsx`   | Course catalog                     | Extra                |
+| `/courses`         | `src/pages/courses/index.tsx`   | Search / course catalog            | Extra                |
 | `/courses/[slug]`  | `src/pages/courses/[slug].tsx`  | Course Details / Lessons / Reviews | Extra                |
 | `/creators`        | `src/pages/creators/index.tsx`  | Creator index                      | Extra                |
 | `/creators/[slug]` | `src/pages/creators/[slug].tsx` | Creator Profile                    | Extra                |
@@ -17,7 +17,7 @@ Implemented screens:
 
 The course page carries the three tabs from the design on one route. `?tab=lessons` and `?tab=reviews` select the other two panels, so every tab is linkable and shareable.
 
-The only screen from the design pack still unbuilt is the Search page. The catalog and creator index pages have no design of their own; they exist so the header navigation resolves, and they reuse the course card and filter bar from the other screens.
+Every screen in the design pack is now built. The creator index at `/creators` has no design of its own; it exists so the header navigation resolves and reuses the cards from the other screens.
 
 Footer links for company and legal pages (Affiliate Program, Contact, Help, About, Privacy Policy, Terms of Service, Cookies Settings) have no screens in the design pack and resolve to the 404 page.
 

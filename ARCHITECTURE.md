@@ -24,7 +24,7 @@ src/
     index.tsx              landing page
     login.tsx              sign in
     register.tsx           create an account
-    courses/index.tsx      course catalog
+    courses/index.tsx      search / course catalog
     courses/[slug].tsx     course details, lessons and reviews (SSG)
     creators/index.tsx     creator index
     creators/[slug].tsx    creator profile (SSG)
@@ -37,7 +37,7 @@ src/
     sections/home/         landing-page bands
     sections/course/       course page: intro, player, sidebar, tabs, three panels
     sections/creator/      creator page hero
-    sections/catalog/      shared page intro, course grid and creator grid
+    sections/catalog/      search hero, page intro, course grid and creator grid
     auth/                  auth layout, card, form, showcase
     seo.tsx                per-page <Head> metadata
   data/                    typed content (home.ts, auth.ts, navigation.ts)
