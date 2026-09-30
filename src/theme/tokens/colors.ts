@@ -1,0 +1,43 @@
+import { defineTokens } from "@chakra-ui/react";
+
+export const colors = defineTokens.colors({
+  brand: {
+    50: { value: "#E7F6FF" },
+    100: { value: "#D3EEFF" },
+    200: { value: "#B0DDFF" },
+    300: { value: "#81C5FF" },
+    400: { value: "#4F9DFF" },
+    500: { value: "#2872FF" },
+    600: { value: "#0445FF" },
+    700: { value: "#0043FF" },
+    800: { value: "#003BE2" },
+    900: { value: "#0B36A4" },
+    950: { value: "#071E5F" },
+  },
+  accent: {
+    50: { value: "#FDFFE4" },
+    100: { value: "#FAFFC5" },
+    200: { value: "#F2FF92" },
+    300: { value: "#E4FF54" },
+    400: { value: "#D4FB20" },
+    500: { value: "#CBFC01" },
+    600: { value: "#8CB400" },
+    700: { value: "#6A8902" },
+    800: { value: "#546B09" },
+    900: { value: "#465A0D" },
+    950: { value: "#243300" },
+  },
+  ink: {
+    50: { value: "#F5F5F6" },
+    100: { value: "#E5E6E8" },
+    200: { value: "#CED0D3" },
+    300: { value: "#ABAEB5" },
+    400: { value: "#82868E" },
+    500: { value: "#666973" },
+    600: { value: "#585A62" },
+    700: { value: "#4B4C53" },
+    800: { value: "#424348" },
+    900: { value: "#3A3B3F" },
+    950: { value: "#242528" },
+  },
+});
