@@ -24,6 +24,8 @@ src/
     index.tsx              landing page
     login.tsx              sign in
     register.tsx           create an account
+    creators/[slug].tsx    creator profile (SSG)
+    courses/[slug].tsx     course details, lessons and reviews (SSG)
     404.tsx                not-found screen
   assets/fonts/            self-hosted woff2 consumed by next/font/local
   components/
@@ -31,6 +33,8 @@ src/
     common/                reusable domain blocks
     layout/                SiteHeader, SiteFooter
     sections/home/         landing-page bands
+    sections/course/       course page: intro, player, sidebar, tabs, three panels
+    sections/creator/      creator page: hero and course grid
     auth/                  auth layout, card, form, showcase
     seo.tsx                per-page <Head> metadata
   data/                    typed content (home.ts, auth.ts, navigation.ts)
@@ -90,6 +94,21 @@ Three places in the design are free-form overlays of cards, photography and 3D p
 This keeps the composition faithful at 1440px and proportionate everywhere else, without re-tuning a dozen absolute offsets per breakpoint.
 
 The hero photography PNGs are alpha-trimmed at build-prep time, so a layout box of `w × h` always frames the subject exactly.
+
+## The course page grid
+
+In the design, the blue band ends just below the video while the sidebar card starts level with the video and overhangs into the white area below. Rather than measure that overhang, the page is one CSS grid and the blue band is a grid item:
+
+```
+row 1   header                     (spans both columns)
+row 2   title, subtitle, meta      (spans both columns)
+row 3   video            | sidebar (sidebar spans rows 3-4)
+row 4   tabs + panel     |
+```
+
+The blue backdrop is a grid item placed at rows 1-3 across both columns with `alignSelf="stretch"`, so it ends exactly where the video ends, whatever the content height. It bleeds past the container with negative insets, and the section uses `overflowX="clip"` to hide the bleed without creating a scroll container.
+
+Tabs are links carrying `?tab=`, so each panel is linkable and the route stays a single SSG page.
 
 ## Content
 

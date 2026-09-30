@@ -4,6 +4,7 @@ import Image from "next/image";
 import NextLink from "next/link";
 
 import { Pill } from "@/components/ui";
+import { courseSlugByCourseId } from "@/data/courses";
 import type { Course } from "@/types/content";
 
 import { AvatarStack } from "./avatar-stack";
@@ -21,6 +22,9 @@ export function CourseCard({
   priority = false,
   ...rest
 }: CourseCardProps) {
+  const detailSlug = courseSlugByCourseId[course.id];
+  const href = detailSlug ? `/courses/${detailSlug}` : undefined;
+
   return (
     <Stack
       layerStyle="surface.card"
@@ -59,7 +63,13 @@ export function CourseCard({
       <Stack gap="12px">
         <HStack align="flex-start" justify="space-between" gap="12px">
           <Heading as="h3" textStyle="heading.xs" lineClamp={1}>
-            {course.title}
+            {href ? (
+              <Link asChild color="fg" _hover={{ color: "fg.brand", textDecoration: "none" }}>
+                <NextLink href={href}>{course.title}</NextLink>
+              </Link>
+            ) : (
+              course.title
+            )}
           </Heading>
           <Rating value={course.rating} flexShrink={0} />
         </HStack>

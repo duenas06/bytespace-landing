@@ -18,11 +18,14 @@ export const pillRecipe = defineRecipe({
       accent: { bg: "accent.500", color: "ink.950" },
       brand: { bg: "brand.800", color: "white" },
       overlay: { bg: "rgba(255, 255, 255, 0.82)", color: "fg", backdropFilter: "blur(6px)" },
+      outline: { bg: "bg", color: "fg", borderWidth: "1px", borderColor: "border.emphasized" },
+      solid: { bg: "bg", color: "fg", boxShadow: "card" },
     },
     scale: {
       xs: { h: "24px", px: "10px", textStyle: "label.xs" },
       sm: { h: "32px", px: "14px", textStyle: "label.s" },
       md: { h: "40px", px: "20px", textStyle: "label.m" },
+      lg: { h: "46px", px: "24px", textStyle: "label.m" },
     },
     interactive: {
       true: {

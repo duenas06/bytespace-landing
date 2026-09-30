@@ -17,5 +17,7 @@ export {
   StudentsCard,
 } from "./metric-cards";
 export { Rating } from "./rating";
+export { ReviewCard } from "./review-card";
+export { StarRating } from "./star-rating";
 export { StatBlock } from "./stat-block";
 export { TestimonialCard } from "./testimonial-card";

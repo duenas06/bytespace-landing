@@ -3,17 +3,24 @@ import { CircleCheck } from "lucide-react";
 
 type CheckListProps = StackProps & {
   items: string[];
+  itemTextStyle?: string;
+  iconSize?: string;
 };
 
-export function CheckList({ items, ...rest }: CheckListProps) {
+export function CheckList({
+  items,
+  itemTextStyle = "body.l",
+  iconSize = "22px",
+  ...rest
+}: CheckListProps) {
   return (
     <Stack gap="16px" {...rest}>
       {items.map((item) => (
         <HStack key={item} gap="12px">
-          <Icon asChild boxSize="22px" color="brand.800">
+          <Icon asChild boxSize={iconSize} color="brand.800" flexShrink={0}>
             <CircleCheck fill="currentColor" stroke="white" strokeWidth={2} />
           </Icon>
-          <Text textStyle="body.l">{item}</Text>
+          <Text textStyle={itemTextStyle}>{item}</Text>
         </HStack>
       ))}
     </Stack>

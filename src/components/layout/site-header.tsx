@@ -1,4 +1,4 @@
-import { Box, HStack, IconButton, Link, Stack } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Link, Stack, type BoxProps } from "@chakra-ui/react";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -8,13 +8,18 @@ import { Logo } from "@/components/common";
 import { Container } from "@/components/ui";
 import { accountNav, primaryNav } from "@/data/navigation";
 
-export function SiteHeader() {
+type SiteHeaderProps = BoxProps & {
+  withContainer?: boolean;
+};
+
+export function SiteHeader({ withContainer = true, ...rest }: SiteHeaderProps) {
   const { pathname } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const Shell = withContainer ? Container : Box;
 
   return (
-    <Box as="header" position="relative" zIndex="docked" color="white">
-      <Container>
+    <Box as="header" position="relative" zIndex="docked" color="white" {...rest}>
+      <Shell>
         <HStack h={{ base: "80px", xl: "header" }} justify="space-between" gap="24px">
           <Link asChild aria-label="ByteSpace home">
             <NextLink href="/">
@@ -57,11 +62,11 @@ export function SiteHeader() {
             {isOpen ? <X /> : <Menu />}
           </IconButton>
         </HStack>
-      </Container>
+      </Shell>
 
       {isOpen ? (
         <Box display={{ base: "block", lg: "none" }} pb="24px">
-          <Container>
+          <Shell>
             <Stack
               gap="16px"
               bg="brand.900"
@@ -76,7 +81,7 @@ export function SiteHeader() {
                 </HeaderLink>
               ))}
             </Stack>
-          </Container>
+          </Shell>
         </Box>
       ) : null}
     </Box>
