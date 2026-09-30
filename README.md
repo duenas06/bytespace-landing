@@ -4,12 +4,22 @@ Marketing site for the ByteSpace online-course platform, built from the "ByteSpa
 
 Implemented screens:
 
-| Route       | Screen                      | Status               |
-| ----------- | --------------------------- | -------------------- |
-| `/`         | Home / landing page         | Required deliverable |
-| `/login`    | Sign in                     | Bonus                |
-| `/register` | Create an account           | Bonus                |
-| `*`         | 404 Not Found (`not-found`) | Bonus                |
+| Route              | File                            | Screen                             | Status               |
+| ------------------ | ------------------------------- | ---------------------------------- | -------------------- |
+| `/`                | `src/pages/index.tsx`           | Home / landing page                | Required deliverable |
+| `/login`           | `src/pages/login.tsx`           | Sign in                            | Bonus                |
+| `/register`        | `src/pages/register.tsx`        | Create an account                  | Bonus                |
+| `/courses`         | `src/pages/courses/index.tsx`   | Course catalog                     | Extra                |
+| `/courses/[slug]`  | `src/pages/courses/[slug].tsx`  | Course Details / Lessons / Reviews | Extra                |
+| `/creators`        | `src/pages/creators/index.tsx`  | Creator index                      | Extra                |
+| `/creators/[slug]` | `src/pages/creators/[slug].tsx` | Creator Profile                    | Extra                |
+| `*`                | `src/pages/404.tsx`             | 404 Not Found                      | Bonus                |
+
+The course page carries the three tabs from the design on one route. `?tab=lessons` and `?tab=reviews` select the other two panels, so every tab is linkable and shareable.
+
+The only screen from the design pack still unbuilt is the Search page. The catalog and creator index pages have no design of their own; they exist so the header navigation resolves, and they reuse the course card and filter bar from the other screens.
+
+Footer links for company and legal pages (Affiliate Program, Contact, Help, About, Privacy Policy, Terms of Service, Cookies Settings) have no screens in the design pack and resolve to the 404 page.
 
 ## Stack
 

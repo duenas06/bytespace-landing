@@ -17,19 +17,19 @@ export const footerColumns: FooterColumn[] = [
     title: "Featured Courses",
     links: [
       { label: "Featured Categories", href: "/courses" },
-      { label: "Business", href: "/courses/business" },
-      { label: "IT", href: "/courses/it" },
-      { label: "Design", href: "/courses/design" },
+      { label: "Business", href: "/courses?category=business" },
+      { label: "IT", href: "/courses?category=software" },
+      { label: "Design", href: "/courses?category=design" },
     ],
   },
   {
     id: "topics",
     title: "Development",
     links: [
-      { label: "Marketing", href: "/courses/marketing" },
-      { label: "Photography", href: "/courses/photography" },
-      { label: "Finance", href: "/courses/finance" },
-      { label: "Sport", href: "/courses/sport" },
+      { label: "Marketing", href: "/courses?category=marketing" },
+      { label: "Photography", href: "/courses?category=photography" },
+      { label: "Finance", href: "/courses?category=business" },
+      { label: "Sport", href: "/courses?category=development" },
     ],
   },
   {

@@ -15,7 +15,11 @@ export function LearningPathsSection() {
 
         <SimpleGrid columns={{ base: 2, md: 3, lg: 6 }} gap="gutter">
           {learningPathCategories.map((category) => (
-            <CategoryCard key={category.id} category={category} href={`/courses/${category.id}`} />
+            <CategoryCard
+              key={category.id}
+              category={category}
+              href={`/courses?category=${category.id}`}
+            />
           ))}
         </SimpleGrid>
       </Stack>

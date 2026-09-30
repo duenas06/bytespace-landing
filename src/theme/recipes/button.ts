@@ -2,10 +2,17 @@ import { defineRecipe } from "@chakra-ui/react";
 
 export const buttonRecipe = defineRecipe({
   base: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
     fontFamily: "body",
     fontWeight: "medium",
     lineHeight: "label",
+    textAlign: "center",
+    textDecoration: "none",
     borderRadius: "pill",
+    cursor: "pointer",
     transitionProperty: "background-color, color, border-color, transform, box-shadow",
     transitionDuration: "fast",
     _active: { transform: "translateY(1px)" },

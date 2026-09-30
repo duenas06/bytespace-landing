@@ -24,8 +24,10 @@ src/
     index.tsx              landing page
     login.tsx              sign in
     register.tsx           create an account
-    creators/[slug].tsx    creator profile (SSG)
+    courses/index.tsx      course catalog
     courses/[slug].tsx     course details, lessons and reviews (SSG)
+    creators/index.tsx     creator index
+    creators/[slug].tsx    creator profile (SSG)
     404.tsx                not-found screen
   assets/fonts/            self-hosted woff2 consumed by next/font/local
   components/
@@ -34,7 +36,8 @@ src/
     layout/                SiteHeader, SiteFooter
     sections/home/         landing-page bands
     sections/course/       course page: intro, player, sidebar, tabs, three panels
-    sections/creator/      creator page: hero and course grid
+    sections/creator/      creator page hero
+    sections/catalog/      shared page intro, course grid and creator grid
     auth/                  auth layout, card, form, showcase
     seo.tsx                per-page <Head> metadata
   data/                    typed content (home.ts, auth.ts, navigation.ts)

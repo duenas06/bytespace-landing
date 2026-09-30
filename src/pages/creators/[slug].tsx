@@ -4,7 +4,8 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import { GridBackdrop } from "@/components/common";
 import { SiteFooter, SiteHeader } from "@/components/layout";
 import { Seo } from "@/components/seo";
-import { CreatorCourses, CreatorHero } from "@/components/sections/creator";
+import { CourseCollection } from "@/components/sections/catalog";
+import { CreatorHero } from "@/components/sections/creator";
 import { creators, getCreator } from "@/data/creators";
 import { featuredCourses } from "@/data/home";
 import type { Course, Creator } from "@/types/content";
@@ -28,7 +29,7 @@ export default function CreatorPage({ creator, courses }: CreatorPageProps) {
           </Box>
         </Box>
 
-        <CreatorCourses courses={courses} />
+        <CourseCollection courses={courses} />
       </Box>
 
       <SiteFooter />

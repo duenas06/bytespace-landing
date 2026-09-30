@@ -57,14 +57,7 @@ export function CourseIntro({ course, creator }: CourseIntroProps) {
         </HStack>
       </Stack>
 
-      <Button
-        visual="accent"
-        scale="md"
-        flexShrink={0}
-        display="inline-flex"
-        alignItems="center"
-        gap="10px"
-      >
+      <Button visual="accent" scale="md" flexShrink={0}>
         <Icon asChild boxSize="18px">
           <Share2 />
         </Icon>
